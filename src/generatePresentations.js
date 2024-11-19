@@ -9,7 +9,7 @@ if (!fs.existsSync(presentationsDir)) {
   fs.mkdirSync(presentationsDir);
 }
 
-// Template básico com links de CDN para Reveal.js
+// Template básico com links de CDN para Reveal.js com plugins adicionados
 const htmlTemplate = (title, content) => `
 <!doctype html>
 <html lang="en">
@@ -31,10 +31,11 @@ const htmlTemplate = (title, content) => `
     <script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script> <!-- Adicionado plugin de Zoom -->
     <script>
       Reveal.initialize({
         hash: true,
-        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ] <!-- Adicionado RevealZoom -->
       });
     </script>
   </body>
