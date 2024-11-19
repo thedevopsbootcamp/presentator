@@ -1,3 +1,15 @@
+const fs = require('fs');
+const path = require('path');
+
+const presentationsDir = path.join(__dirname, '..', 'presentations');
+const inputDir = path.join(__dirname, '..', 'markdowns');
+
+// Criar diretório de apresentações, se não existir
+if (!fs.existsSync(presentationsDir)) {
+  fs.mkdirSync(presentationsDir);
+}
+
+// Template básico com links de CDN para Reveal.js com tema Dracula
 const htmlTemplate = (title, content) => `
 <!doctype html>
 <html lang="en">
@@ -27,3 +39,25 @@ const htmlTemplate = (title, content) => `
     </script>
   </body>
 </html>
+`;
+
+function convertMarkdownToHTML(filePath) {
+  const fileName = path.basename(filePath, '.md');
+  const outputFile = path.join(presentationsDir, `${fileName}.html`);
+  const content = fs.readFileSync(filePath, 'utf-8')
+    .split('\n')
+    .map(line => `<section>${line.trim()}</section>`)
+    .join('\n');
+
+  const htmlContent = htmlTemplate(fileName, content);
+
+  fs.writeFileSync(outputFile, htmlContent);
+  console.log(`Apresentação gerada: ${outputFile}`);
+}
+
+const inputFiles = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
+
+inputFiles.forEach(file => {
+  const filePath = path.join(inputDir, file);
+  convertMarkdownToHTML(filePath);
+});
