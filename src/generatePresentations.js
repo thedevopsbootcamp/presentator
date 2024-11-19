@@ -9,7 +9,7 @@ if (!fs.existsSync(presentationsDir)) {
   fs.mkdirSync(presentationsDir);
 }
 
-// Template básico com links de CDN para Reveal.js com tema Dracula
+// Template básico com links de CDN para Reveal.js e tema Dracula customizado
 const htmlTemplate = (title, content) => `
 <!doctype html>
 <html lang="en">
@@ -18,8 +18,24 @@ const htmlTemplate = (title, content) => `
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>${title}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css"> <!-- Base theme -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/dracula.min.css"> <!-- Dracula theme for code highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css"> <!-- Base theme (opcional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/dracula.min.css"> <!-- Tema Dracula para código -->
+    <style>
+      /* Tema customizado Dracula para Reveal.js */
+      .reveal {
+        background-color: #282a36; /* Fundo escuro Dracula */
+        color: #f8f8f2; /* Texto claro Dracula */
+      }
+      .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+        color: #bd93f9; /* Cor de títulos seguindo o tema Dracula */
+      }
+      .reveal a {
+        color: #ff79c6; /* Links com cor do esquema Dracula */
+      }
+      .reveal .slides section {
+        padding: 20px;
+      }
+    </style>
   </head>
   <body>
     <div class="reveal">
